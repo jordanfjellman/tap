@@ -9,42 +9,54 @@ A Homebrew tap for jordanfjellman's command-line tools.
 AI-powered multi-repository task orchestration system.
 
 ```bash
-# Install
-HOMEBREW_GITHUB_API_TOKEN=your_token brew install jordanfjellman/tap/fjelly
+# Add the tap (using SSH is recommended for private repos)
+brew tap jordanfjellman/tap git@github.com:jordanfjellman/tap.git
 
-# Or if you have gh CLI authenticated:
-brew install jordanfjellman/tap/fjelly
+# Install with authentication
+HOMEBREW_GITHUB_API_TOKEN=ghp_your_token brew install jordanfjellman/tap/fjelly
 ```
 
 ## Setup
 
-### For Private Repository Access
+### ⚠️ Important: Authentication Required
 
-Since the binaries are hosted in a private repository, you need to authenticate:
+Since the binaries are hosted in a private repository, you **must** authenticate to download releases.
 
-#### Option 1: Environment Variable (Recommended)
+**Note:** GitHub CLI authentication (`gh auth login`) does NOT work for release downloads. You need a **classic Personal Access Token**.
+
+#### Option 1: Personal Access Token (Required)
+
+1. Create a token at https://github.com/settings/tokens/new
+   - Select **"Tokens (classic)"**
+   - Check the **`repo`** scope
+   - Generate token
+
+2. Install with token:
+   ```bash
+   export HOMEBREW_GITHUB_API_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+   brew tap jordanfjellman/tap
+   brew install jordanfjellman/tap/fjelly
+   ```
+
+#### Option 2: Manual Download
+
+If you don't want to use Homebrew authentication:
+
 ```bash
-export HOMEBREW_GITHUB_API_TOKEN=ghp_your_personal_access_token
-brew install jordanfjellman/tap/fjelly
+# Get a token (classic PAT with 'repo' scope)
+TOKEN="ghp_xxxxxxxxxxxxxxxxxxxx"
+
+# Download using GitHub API
+curl -L \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/octet-stream" \
+  "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/388882110" \
+  -o fjelly.tar.gz
+
+# Extract and install
+tar -xzf fjelly.tar.gz
+cp fjelly /usr/local/bin/  # or any directory in your $PATH
 ```
-
-#### Option 2: GitHub CLI
-```bash
-gh auth login
-brew install jordanfjellman/tap/fjelly
-```
-
-#### Option 3: Git Credential Helper
-```bash
-git config --global credential.helper osxkeychain
-# First time brew will prompt for credentials
-```
-
-### Creating a Personal Access Token
-
-1. Go to GitHub Settings → Developer Settings → Personal Access Tokens → Tokens (classic)
-2. Generate new token with `repo` scope
-3. Copy the token and use it as `HOMEBREW_GITHUB_API_TOKEN`
 
 ## Adding More Formulas
 
