@@ -9,13 +9,13 @@
 class Fjelly < Formula
   desc "AI-powered multi-repository task orchestration system"
   homepage "https://github.com/jordanfjellman/fjelly"
-  version "0.3.1"
+  version "0.3.2"
   license "MIT"
 
   on_arm do
-    url "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/390553397",
+    url "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/390557147",
         using: :github_private_release
-    sha256 "7791152615529909b2d2bf786c32def8a56c09c4193a5f7d70684a198c449c33"
+    sha256 "111fb68c98ccd626b574134af7cba720d215e200855beba45ddc4ab8ec251beb"
   end
 
   def install
