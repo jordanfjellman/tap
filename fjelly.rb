@@ -13,9 +13,9 @@ class Fjelly < Formula
   license "MIT"
 
   on_arm do
-    url "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/390550886",
+    url "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/390553397",
         using: :github_private_release
-    sha256 "935c4f036f1adc57d8a66aa28a693c015f39eb4f836e0ed420f3c93689b53c31"
+    sha256 "7791152615529909b2d2bf786c32def8a56c09c4193a5f7d70684a198c449c33"
   end
 
   def install
