@@ -1,20 +1,21 @@
 # This formula requires a GitHub token to download from the private repository.
 # Setup options:
-#   1. Export HOMEBREW_GITHUB_API_TOKEN with a personal access token (classic) with 'repo' scope
+#   1. Export HOMEBREW_GITHUB_API_TOKEN with a personal access token
 #   2. Run: gh auth login (if using GitHub CLI)
+#   3. Set GITHUB_TOKEN environment variable
 #
-# Example: HOMEBREW_GITHUB_API_TOKEN=ghp_xxx brew install jordanfjellman/tap/fjelly
+# Example: HOMEBREW_GITHUB_API_TOKEN=your_token brew install jordanfjellman/tap/fjelly
 
 class Fjelly < Formula
   desc "AI-powered multi-repository task orchestration system"
   homepage "https://github.com/jordanfjellman/fjelly"
-  version "0.2.0"
+  version "0.3.0"
   license "MIT"
 
   on_arm do
-    # Homebrew automatically uses HOMEBREW_GITHUB_API_TOKEN for GitHub URLs
-    url "https://github.com/jordanfjellman/fjelly/releases/download/v0.2.0/fjelly-aarch64-apple-darwin.tar.gz"
-    sha256 "a1908678adb76f21bbd9326904af220ce8d14861af4d0a3fd68dfd96db576697"
+    url "https://api.github.com/repos/jordanfjellman/fjelly/releases/assets/390534248",
+        using: :github_private_release
+    sha256 "ec3078a39c1f48943bd9b2a80bef34b75284da249afdede082946457816f9abe"
   end
 
   def install
